@@ -524,7 +524,7 @@ module.exports = {
 
               displayArray.push(displayObj);
               fs.writeFile(
-                "./json/DisplayRequest.json",
+                "./json/displayRequest.json",
                 JSON.stringify(displayArray, null, 2),
                 (err) => {
                   if (err) {
