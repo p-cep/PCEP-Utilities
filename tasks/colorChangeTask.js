@@ -25,7 +25,6 @@ function colorTask() {
   }
 
   const date = new Date();
-  console.log(date);
   if (date.getDay() == initStartDay) {
     jsonReader("./json/colorChanged.json", (err, data) => {
       if (err) {
