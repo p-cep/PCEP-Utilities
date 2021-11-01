@@ -13,6 +13,7 @@ module.exports = {
         .setColor("RED");
         if (!perms) return interaction.followUp({ embeds: [noPerms] }); 
 
+        interaction.followUp('The client has been killed');
         client.destroy();
         console.log(`The client has been killed by: ${interaction.user.username}`)
         process.exit();
