@@ -20,17 +20,16 @@ async function news() {
     } else {
       data = JSON.parse(data0);
       let iteration = 0;
-      let newsNumber = null;
+      let newsNumber = 0;
       for (let news in data) {
-        if (feed.items[0].guid != data[iteration].guid) {
+        if (feed.items[0].guid == data[iteration].guid) {
           continue;
         } else {
-          newsNumber = iteration;
+          newsNumber++;
         }
+        iteration++;
       }
-      if (newsnumber === null) {
-        return;
-      } else {
+      if (newsNumber == data.length) {
         console.log("there is a new thing");
         const date = new Date();
         const embed = new MessageEmbed()
@@ -66,6 +65,8 @@ async function news() {
             if (err) console.log(err);
           }
         );
+      } else {
+        return;
       }
     }
   });
