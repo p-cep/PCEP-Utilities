@@ -57,7 +57,7 @@ async function news() {
         const pushData = { guid: feed.items[0].guid };
         let newData = data;
         newData.push(pushData);
-        if (newData.length > 5) newData.pop();
+        if (newData.length > 5) newData.shift();
         fs.writeFile(
           "./json/news.json",
           JSON.stringify(newData, null, 2),
