@@ -128,6 +128,14 @@ module.exports = {
       .setDescription("The following Changes have been made: ")
       .setTimestamp();
 
+      const perms = interaction.member.roles.cache.some(r => r.name === 'Administrators') 
+        
+      const noPerms = new MessageEmbed()
+      .setTitle("Error!")
+      .setDescription("Oh no! you dont have permissions to use this command.")
+      .setColor("RED");
+      if (!perms) return interaction.followUp({ embeds: [noPerms] }); 
+    
     jsonReader("./settings.json", (err, data) => {
       if (err) {
         console.log(err);
