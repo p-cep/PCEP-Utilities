@@ -2,6 +2,8 @@ const client = require("../../index.js");
 const { MessageEmbed } = require('discord.js')
 
 module.exports = { 
+    name: "kill",
+    description: "'destroys' the client",
     execute(interaction) {
         const perms = interaction.member.roles.cache.some(r => r.name === 'Administrators') 
         

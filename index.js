@@ -5,6 +5,7 @@ module.exports = client;
 const { token } = require('./config.json');
 
 client.commands = new Collection();
+client.setMaxListeners(20);
 const colorTask = require('./tasks/colorChangeTask.js');
 const newsTask = require('./tasks/news.js');
 cron.schedule("*/10 * * * *", () => {
