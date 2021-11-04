@@ -51,10 +51,8 @@ function colorTask() {
       if (err) {
         console.log(err);
       } else {
-        if (data.colorchangedtoday == "true") {
-          let colorChangedToday = data;
-          colorChangedToday = [{ colorchangedtoday: "false" }];
-
+        if (data[0].colorchangedtoday == "true") {
+          let colorChangedToday = [{ colorchangedtoday: "false" }];
           fs.writeFile(
             "./json/colorChanged.json",
             JSON.stringify(colorChangedToday),
