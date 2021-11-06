@@ -4,10 +4,10 @@ const client = require("../index.js");
 const {
   initStartDay,
   resetStartDay, //the day the color change initiates, and the day the json is reset, thus closing the ability to reroll
-  guildId,
   announcementChannelId,
   roleChangeId,
 } = require("../settings.json");
+const { guildId } = require('../config.json');
 
 function colorTask() {
   function jsonReader(filePath, cb) {
