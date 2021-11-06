@@ -251,6 +251,11 @@ module.exports = {
         answer9,
         answer10,
       ];
+
+      const answerLengthError = new MessageEmbed()
+        .setTitle('Error!')
+        .setDescription('Answers cannot be over 100 characters long')
+        .setColor('RED');
     
       let testOptions = [];
       let iteration00 = 0;
@@ -280,6 +285,7 @@ module.exports = {
       let iteration = 0;
       for (let option in options) {
         if (options[iteration] === null) continue;
+        if (options[iteration].length >= 100) return interaction.followUp({ embeds: [answerLengthError] });
         selectOptions.push({
           label: `Option: ${[iteration + 1]}`,
           value: option,
@@ -361,7 +367,8 @@ module.exports = {
       interaction.followUp({ embeds: [confmsg] });
     }
 
-    // for ending poll ( very incomplete )
+
+
     if (interaction.options.getSubcommand() === "end") {
       jsonReader("./json/endPollRequest.json", (err, data) => {
         if (err) {
@@ -381,11 +388,18 @@ module.exports = {
             .setDescription(`please select what poll you want to end`)
             .setColor("RANDOM");
 
-          jsonReader("./json/polls.json", (err, data0) => {
+          jsonReader("./json/polls.json", (err, pollData) => {
+            let data0 = pollData;
             if (err) {
               console.log(err);
             } else {
               for (poll in data0) {
+                if (data0[iteration0].poll[1].title.length >= 100) {
+                  data0[iteration0].poll[1].title = data0[iteration0].poll[1].title.substring(0,97) + "..."
+                }
+                if (data0[iteration0].poll[2].question.length >= 100) {
+                  data0[iteration0].poll[2].question = data0[iteration0].poll[2].question.substring(0,97) + "..."
+                }
                 endEmbed.addField(
                   `Survey: ${data0[iteration0].poll[1].title}`,
                   `question: ${data0[iteration0].poll[2].question}`
