@@ -378,6 +378,7 @@ module.exports = {
           let endCustomId = randomId(15);
           let endRequest = data;
           let iteration0 = 0;
+          let iteration = 0;
           let pollsArray = [];
 
           if (endRequest.length > 10) {
@@ -389,11 +390,21 @@ module.exports = {
             .setColor("RANDOM");
 
           jsonReader("./json/polls.json", (err, pollData) => {
-            let data0 = pollData;
             if (err) {
               console.log(err);
             } else {
+              let data0 = pollData;
+              for (poll in pollData) {
+                pollsArray.push({
+                  poll: [
+                    { pollId: pollData[iteration].poll[0].pollNumber },
+                    { title: pollData[iteration].poll[1].title },
+                    { question: pollData[iteration].poll[2].question },
+                  ],
+                });
+              }
               for (poll in data0) {
+                console.log(pollData[iteration0].poll[2].question);
                 if (data0[iteration0].poll[1].title.length >= 100) {
                   data0[iteration0].poll[1].title = data0[iteration0].poll[1].title.substring(0,97) + "..."
                 }
@@ -408,22 +419,16 @@ module.exports = {
                   label: `Title: ${data0[iteration0].poll[1].title}`,
                   value: `${data0[iteration0].poll[0].pollNumber}`,
                   description: `${data0[iteration0].poll[2].question}`,
-                });
-                pollsArray.push({
-                  poll: [
-                    { pollId: data0[iteration0].poll[0].pollNumber },
-                    { title: data0[iteration0].poll[1].title },
-                    { question: data0[iteration0].poll[2].question },
-                  ],
-                });
+                }); 
                 iteration0++;
               }
+             
               const ERRR = new MessageEmbed()
                 .setColor("RED")
                 .setTitle("Error!")
                 .setDescription("There are no active polls");
 
-              if (!data0[0]) return interaction.followUp({ embeds: [ERRR] });
+              if (!pollData[0]) return interaction.followUp({ embeds: [ERRR] });
               endRequest.push({
                 endPoll: [{ endCustomId: endCustomId }, { polls: pollsArray }],
               });
@@ -462,12 +467,6 @@ module.exports = {
         resultsChannel = null;
       }
 
-      let ephemeralresults = false;
-      if (interaction.options.getBoolean('ephemeralresults')) {
-        ephemeralresults =
-          interaction.options.getBoolean('ephemeralresults');
-      }
-
       const resultsEmbed = new MessageEmbed()
         .setTitle("Choose one")
         .setDescription(
@@ -496,37 +495,21 @@ module.exports = {
 
           let displayOptions = [];
           let iteration0 = 0;
-          for (polls in newArry) {
-            newArry[iteration0].poll[0].pollNumber = randomId(10);
-
-            resultsEmbed.addField(
-              `Poll: ${newArry[iteration0].poll[1].title}`,
-              `Question: ${newArry[iteration0].poll[2].question}`
-            );
-            displayOptions.push({
-              label: `Title: ${newArry[iteration0].poll[1].title}`,
-              value: `${newArry[iteration0].poll[0].pollNumber}`,
-              description: `${newArry[iteration0].poll[2].question}`,
-            });
-
-            iteration0++;
-          }
+          let iteration00 = 0;
           const displayCustomId = randomId(20);
-          const resultsRow = new MessageActionRow().addComponents(
-            new MessageSelectMenu()
-              .setCustomId(displayCustomId)
-              .setPlaceholder("Nothing Selected")
-              .addOptions(displayOptions)
-          );
-
-          jsonReader("./json/displayRequest.json", (err, data) => {
+          
+          for (polls in newArry) {
+            newArry[iteration00].poll[0].pollNumber = randomId(10);
+            iteration00++;
+          }
+          jsonReader("./json/displayRequest.json", (err, data0) => {
             if (err) {
               console.log(err);
             } else {
               
+              let displayArray = data0;
               let ephemeral =
                 interaction.options.getBoolean("ephemeralresults");
-              let displayArray = data;
               let displayObj = {
                 displayRequest: [
                   { displayCustomId: displayCustomId },
@@ -546,15 +529,48 @@ module.exports = {
                   }
                 }
               );
+              fs.writeFile('./json/endedPoll.json', JSON.stringify(newArry, null, 2), (err) => {
+                if (err) console.log(err);
+              });
+              let newArry0 = newArry;
+          for (polls in newArry0) {
+            if (newArry0[iteration0].poll[1].title.length >= 100) {
+              const arry = newArry0[iteration0].poll[1].title;
+              arry0 = arry.substring(0,97);
+              arry0 = arry0 + "...";
+              newArry0[iteration0].poll[1].title = arry0;
+              console.log(arry0);
             }
-          });
-          fs.writeFile('./json/endedPoll.json', JSON.stringify(newArry, null, 2), (err) => {
-            if (err) console.log(err);
-          });
+            if (newArry0[iteration0].poll[2].question.length >= 100) {
+              newArry0[iteration0].poll[2].question = newArry0[iteration0].poll[2].question.slice(0,97) + "...";
+              console.log(newArry[iteration0].poll[2].question);
+            }
+            resultsEmbed.addField(
+              `Poll: ${newArry0[iteration0].poll[1].title}`,
+              `Question: ${newArry0[iteration0].poll[2].question}`
+            );
+            displayOptions.push({
+              label: `Title: ${newArry0[iteration0].poll[1].title}`,
+              value: `${newArry0[iteration0].poll[0].pollNumber}`,
+              description: `${newArry0[iteration0].poll[2].question}`,
+            });
+            iteration0++;
+          }
+
+          const resultsRow = new MessageActionRow().addComponents(
+            new MessageSelectMenu()
+              .setCustomId(displayCustomId)
+              .setPlaceholder("Nothing Selected")
+              .addOptions(displayOptions)
+          );
+
           return interaction.followUp({
             embeds: [resultsEmbed],
             components: [resultsRow],
           });
+            }
+          });
+          
         }
       });
     }
