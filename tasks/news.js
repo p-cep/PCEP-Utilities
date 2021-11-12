@@ -13,6 +13,7 @@ async function news() {
       "https://www.pccsk12.com/Home/Components/RssFeeds/RssFeed/View?ctID=5&cateIDs=23"
     )
     .catch((err) => console.log(err));
+  if (feed == undefined) return ('pcep website is bad lel 60second timeout');
   let data;
   fs.readFile("./json/news.json", "utf-8", (err, data0) => {
     if (err) {
