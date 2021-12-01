@@ -12,7 +12,7 @@ Make sure you have all dependencies by checking `package.json` or running `npm i
 - node-cron
 - rss-parser
 
-#####To install all dependencies, run the following command: 
+####To install all dependencies, run the following command: 
 `npm i discord.js moment node-cron rss-parser`
 
 ### Configuration
