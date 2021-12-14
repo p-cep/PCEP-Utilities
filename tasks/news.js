@@ -1,4 +1,3 @@
-// currently disabled, posting function is not implemented
 const { MessageEmbed } = require("discord.js");
 const fs = require("fs");
 const Parser = require("rss-parser");
@@ -13,7 +12,7 @@ async function news() {
       "https://www.pccsk12.com/Home/Components/RssFeeds/RssFeed/View?ctID=5&cateIDs=23"
     )
     .catch((err) => console.log(err));
-  if (feed == undefined) return ('pcep website is bad lel 60second timeout');
+  if (feed == undefined) return console.log('pcep website is bad lel 60second timeout');
   let data;
   fs.readFile("./json/news.json", "utf-8", (err, data0) => {
     if (err) {
