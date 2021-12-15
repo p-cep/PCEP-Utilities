@@ -10,15 +10,15 @@ module.exports = {
     var m = Math.floor(seconds % 3600 / 60);
     var s = Math.floor(seconds % 60);
 
-    var day = d > 0 ? d + (d == 1 ? " day, " : " days, ") : "";
-    var hours = h > 0 ? h + (h == 1 ? " hour, " : " hours, ") : "";
-    var minutes = m > 0 ? m + (m == 1 ? " minute, " : " minutes, ") : "";
-    var seconds = s > 0 ? s + (s == 1 ? " second" : " seconds") : ""; 
+    var d0 = d > 0 ? d + (d == 1 ? " day, " : " days, ") : "";
+    var h0 = h > 0 ? h + (h == 1 ? " hour, " : " hours, ") : "";
+    var m0 = m > 0 ? m + (m == 1 ? " minute, " : " minutes, ") : "";
+    var s0 = s > 0 ? s + (s == 1 ? " second" : " seconds") : ""; 
 
     let embed = new MessageEmbed()
     .setColor('RANDOM')
     .setTitle('Uptime:')
-    .setDescription(`${day} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds`);
+    .setDescription(d0 + h0 + m0 + s0);
 
     interaction.followUp({ embeds: [embed] });
   },
