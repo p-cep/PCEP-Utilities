@@ -23,7 +23,6 @@ module.exports = {
                 if (top25.length > 25 ) {
                     top25.slice(0, 24);
                 }
-                console.log(top25);
                 let countersString = ''
                 let iteration1 = 0; 
                 for (users in top25) {
@@ -45,7 +44,9 @@ module.exports = {
                     .setAuthor( 'P-CEP Counting Scoreboard', `${interaction.guild.iconURL({ dynamic: true }) }` )
                     .setDescription(countersString)
                     .setFooter(`Requested By ${interaction.user.tag}`)
-                interaction.followUp({ embeds: [embed] })
+                interaction.followUp('done')
+                interaction.channel.send({ embeds: [embed] });
+                
             }
         })
     }

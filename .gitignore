@@ -26,3 +26,5 @@ json/polls.json
 #for storing the latest news from https://www.pccsk12.com/Home/Components/RssFeeds/RssFeed/View?ctID=5&cateIDs=23
 json/news.json
 
+#counting
+counting.json

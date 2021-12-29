@@ -15,7 +15,7 @@ module.exports = {
     const errEmbed = new MessageEmbed()
       .setColor("RED")
       .setDescription("You do not have permission to change the count!");
-    const perms = interaction.member.roles.cache.some((r) => r.name === "Mod");
+    const perms = interaction.member.roles.cache.some((r) => r.name === "Moderators");
     if (!perms) return interaction.followUp({ embeds: [errEmbed] });
     fs.readFile("./json/counting.json", "utf-8", (err, data0) => {
       if (err) {

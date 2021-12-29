@@ -1,4 +1,4 @@
-const countingChannelId = "925553700674629642"
+const countingChannelId = "896299895034634301"
 const fs = require('fs');
 module.exports = { 
     name: 'messageCreate', 
