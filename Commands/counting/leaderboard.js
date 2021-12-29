@@ -34,7 +34,7 @@ module.exports = {
                     } else if (iteration1 == 2 || iteration1 == 22) {
                         prefix = 'rd'
                     } else {
-                        predix = 'th'
+                        prefix = 'th'
                     }
                     countersString = countersString + `**${iteration1 + 1}${prefix}** <@${top25[iteration1].id}>: **count:** ${top25[iteration1].count}\n`
                     iteration1++;
