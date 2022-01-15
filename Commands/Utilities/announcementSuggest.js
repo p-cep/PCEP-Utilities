@@ -7,14 +7,14 @@ module.exports = {
     "suggust an announcement to a moderator that will be posted in announcements",
   options: [
     {
-      name: "annonucement",
+      name: "announcement",
       description: "what do you want to say?",
       type: "STRING",
       required: "true",
     },
   ],
   async execute() {
-    const announcement = interation.options.getString("annonucement");
+    const announcement = interation.options.getString("announcement");
     const successEmbed = new MessageEmbed()
       .setColor("GREEN")
       .setDescription(
@@ -37,13 +37,13 @@ module.exports = {
     const buttons = new MessageActionRow()
       .addComponents(
         new MessageButton()
-          .setCustomId(1)
+          .setCustomId('1')
           .setLabel("Accept")
           .setStyle("SUCCESS")
       )
       .addComponents(
         new MessageButton()
-        .setCustomId(0)
+        .setCustomId('0')
         .setLabel("Deny")
         .setStyle("DANGER")
       );
