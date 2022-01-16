@@ -1,4 +1,4 @@
-const { MessageEmbed } = require("discord.js");
+const { MessageEmbed, MessageActionRow, MessageButton } = require("discord.js");
 const moment = require("moment");
 const suggustionsChannelId = '926743021008068608'
 module.exports = {
@@ -13,14 +13,22 @@ module.exports = {
       required: "true",
     },
   ],
-  async execute() {
-    const announcement = interation.options.getString("announcement");
+  async execute(interaction) {
+    const announcement = interaction.options.getString("announcement");
+
+    const errEmbed = new MessageEmbed()
+      .setColor("RED")
+      .setDescription(
+        "Oops! The maximum length of an announcement is 2048 characters!"
+      );
+      if (announcement.length > 2048) return interaction.followUp({ embeds: [errEmbed] });
+
     const successEmbed = new MessageEmbed()
       .setColor("GREEN")
       .setDescription(
         "Your response has been saved. A moderator will review your application"
       );
-    interaction.reply({ embeds: [successEmbed] });
+    interaction.followUp({ embeds: [successEmbed] });
 
     const applicationEmbed = new MessageEmbed()
       .setColor("RANDOM")
@@ -37,13 +45,13 @@ module.exports = {
     const buttons = new MessageActionRow()
       .addComponents(
         new MessageButton()
-          .setCustomId('1')
+          .setCustomId(`1${interaction.user.id}`)
           .setLabel("Accept")
           .setStyle("SUCCESS")
       )
       .addComponents(
         new MessageButton()
-        .setCustomId('0')
+        .setCustomId(`0${interaction.user.id}`)
         .setLabel("Deny")
         .setStyle("DANGER")
       );
