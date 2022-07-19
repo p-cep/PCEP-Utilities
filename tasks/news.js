@@ -49,7 +49,7 @@ export default async function news() {
                 const guilds = client.guilds.cache.map((res) => {
                     return res;
                 });
-                fs.readFile("./settings.json", "utf-8", (err, res) => {
+                fs.readFile("./json/settings.json", "utf-8", (err, res) => {
                     if (err) return console.log(err);
                     const data = JSON.parse(res);
                     for (const guild of guilds) {
