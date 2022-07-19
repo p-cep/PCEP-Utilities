@@ -13,7 +13,7 @@ Make sure you have all dependencies by checking `package.json` or running `npm i
 - rss-parser
 
 To install all dependencies, run the following command: 
-`npm i discord.js moment node-cron rss-parser`
+`npm i `
 
 ### Configuration
 Rename `config.json.example` to `config.json` locally and replace the corresponding fields with the bot token (to run bot), and the main guild ID (to create slash commands).

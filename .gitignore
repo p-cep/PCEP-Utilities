@@ -1,30 +1,5 @@
-#node dependiencies + linter config
-
 node_modules
 .eslintrc.json
-
-#config json files
-config.json
-settings.json
-
-
-#json data for polls, news parsing, and mystery color
-# of the week shuffling
-
-#for storing color data + votes
-json/colorChanged.json 
-
-#for storing action row + poll data for requesting poll results
-json/displayRequest.json
-#for storing action row + poll data afor requesting to end a poll
-json/endPollRequest.json
-#for storing polls that have ended 
-json/endedPoll.json
-#for storing active poll data
-json/polls.json
-
-#for storing the latest news from https://www.pccsk12.com/Home/Components/RssFeeds/RssFeed/View?ctID=5&cateIDs=23
+.env
+json/settings.json
 json/news.json
-
-#counting
-counting.json

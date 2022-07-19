@@ -1,21 +1,16 @@
-const { Client, Collection } = require('discord.js');
-var cron = require('node-cron');
+import newsTask from './tasks/news.js';
+import env from 'dotenv';
+import cron from 'node-cron';
+import { Client, Collection } from 'discord.js';
+env.config()
 const client = new Client({ intents: 32767 });
-module.exports = client;
-const { token } = require('./config.json');
-
 client.commands = new Collection();
 client.setMaxListeners(20);
-const colorTask = require('./tasks/colorChangeTask.js');
-const newsTask = require('./tasks/news.js');
-cron.schedule("*/10 * * * *", () => {
-    colorTask();
+export default client;
+['Events.js', 'Commands.js'].forEach(handler => {
+import(`./Handlers/${handler}`).then(file => file.default(client));
 });
 cron.schedule("*/1 * * * *", () => {
     newsTask();
 });
-['Events', 'Commands'].forEach(handler => {
-require(`./Handlers/${handler}`)(client);
-});
-
-client.login(token);
+client.login(process.env.token);

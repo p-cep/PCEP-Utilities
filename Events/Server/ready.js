@@ -1,7 +1,7 @@
-module.exports = {
+export default {
     name: 'ready',
     execute(client) {
         console.log('The client is ready :)');
-        client.user.setActivity('/survey', { type: 'PLAYING' });
+        client.user.setActivity('For News', { type: 'WATCHING' });
     },
 };

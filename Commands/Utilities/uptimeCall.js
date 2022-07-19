@@ -1,8 +1,7 @@
-const { MessageEmbed } = require("discord.js");
-const fs = require("fs");
-module.exports = {
+import { MessageEmbed } from "discord.js";
+export default {
   name: "uptime",
-  description: "Display's the amount of time P-CEP Utilities has been online",
+  description: "Display's the amount of time Void has been online",
   execute(interaction) {
     let seconds = process.uptime();
     var d = Math.floor(seconds / (3600*24));
@@ -20,6 +19,6 @@ module.exports = {
     .setTitle('Uptime:')
     .setDescription(d0 + h0 + m0 + s0);
 
-    interaction.followUp({ embeds: [embed] });
+    interaction.reply({ embeds: [embed] });
   },
 };

@@ -1,7 +1,8 @@
 {
-  "name": "p-cep-polls",
-  "version": "1.0.0",
-  "description": "pollssss + survey ",
+  "name": "p-cep-news",
+  "version": "1.4.0",
+  "description": "pcep news bot",
+  "type": "module",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -9,10 +10,10 @@
   "author": "Michael C",
   "license": "ISC",
   "dependencies": {
-    "discord.js": "^13.2.0",
+    "discord.js": "^13.9.0",
+    "dotenv": "^16.0.1",
     "moment": "^2.29.1",
     "node-cron": "^3.0.0",
-    "puppeteer": "^11.0.0",
     "rss-parser": "^3.12.0"
   },
   "repository": {
